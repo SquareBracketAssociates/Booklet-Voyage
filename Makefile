@@ -2,6 +2,8 @@ MAIN = book
 CHAPTERS = \
 	Chapters/VoyageTutorial/VoyageTutorial \
 	Chapters/VoyageExtras/VoyageExtras \
+	Chapters/Voyage/Voyage \
+	Chapters/Voyage/VoyageIntro \
 	
 OUTPUTDIRECTORY = build
 LATEXTEMPLATE = support/templates/main.latex.mustache
