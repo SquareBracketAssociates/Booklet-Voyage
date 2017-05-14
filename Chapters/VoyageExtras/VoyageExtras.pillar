@@ -1,30 +1,9 @@
+!! Tips and Tricks
+
+This chapter contains some tips and tricks that people collected over the years. It was written by Sabina Manaa.
 
 
-!! To be edited in the main document
-
-Page 2 please change my name from Knöfel to Manaa
-Page 6 after “For MongoDB this can be done through the mongo command line interface, or a GUI tool such as RoboMongo (Multi-Platform) or MongoHub (for Mac). ” add: “Since Pharo 4, you can also use the Mongo Browser. (World->Tools->Mongo Browser)”
-
- !! A few words concerning OID
-The ObjectId (OID) is a unique field that acts as a primary key in mongo. It is a  BSON type, according to the mongo documentation constructed using:
-
-a 4-byte value representing the seconds since the Unix epoch,
-a 3-byte machine identifier,
-a 2-byte process id, and
-a 3-byte counter, starting with a random value.
-
-Objects which are added into a mongo root collection (==isVoyageRoot==), get a unique id, instance of ==OID==. If you create such an object and then ask it for its OID by sending ==voyageID==,  (see chapter 4), you get the OID. The value of the OID is a LargePositiveInteger.
-
-It is possible to create and use your own implementation of OID and put these objects into mongo database but keep in mind that you possibly not be longer be able to query this objects by its OID (by voyageID), because mongo expects a certain format. So it is not recommended to do that. If you do, you should check your format by querying for it in the mongo console. If you get the result Error: invalid object id: length, then you will not be able to query this object by id.
-
-[[[
-> db.Trips.find({"person.__id" : ObjectId("190372")})
-Mon Aug 17 14:21:10.815 Error: invalid object id: length
-]]]
-
-Advantage of the OID in the mongo format is that they are ordered by creation date and time and you have an indexed (there is a non deletable index on the _id field) "creationDateAndTime" field for free. 
-
-!!!How to query for an object by id?    
+!!! How to query for an object by id?    
 
 If you know the _id value, you initialize an OID with this and query for it.
 [[[	
@@ -179,11 +158,10 @@ Query again, all documents were scanned.
 
 
 
-!!!Storing instances of Date in Mongo
-A known issue of mongo is Mongo that it does not difference between Date and DateAndTime, so even if you commit a Date, you will get back a DateAndTime. 
-You have to transform it back to Date manually when materializing the object.
+!!! Storing instances of Date in Mongo
+A known issue of mongo is Mongo that it does not difference between ==Date== and ==DateAndTime==, so even if you commit a ==Date==, you will get back a ==DateAndTime==. You have to transform it back to ==Date== manually when materializing the object.
 
-!!Database design
+!!! Database design
 Often you objects do not form a simple tree but a graph with cycles. For example you could have persons which are pointing to their trips and each trip knows about its person (==Person <->>Trip==). If you create a root Collection with Persons and a Root collection with Trips, you avoid endless loops to be generated (see chapter 1.2).
 
 This is an example for a ==trip== pointing to a ==person== which is in another root collection and another root collection, ==paymentMethod==. Note that the receipt also points back to the trip, which does not create a loop.
@@ -215,7 +193,7 @@ Trip
 ]]]
 
 The corresponding ==person== points to all its ==trips== and to its ==company==.
-Person
+[[[
 { "#version" : 714221829, 
 "_id" : ObjectId("55cf2bbb3c9b0fe702000007"), 
 "bankName" : "",
@@ -232,7 +210,7 @@ Person
 {
 "#collection" : "Trips", 	
 "__id" : ObjectId("55cf2bc73c9b0fe702000008") } ] }
-
+]]]
 
 If your domain has strictly delimited areas, e.g. clients, you could think about creating one repository per area (client). 
 
