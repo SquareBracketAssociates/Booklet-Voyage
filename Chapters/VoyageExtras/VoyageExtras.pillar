@@ -214,6 +214,73 @@ The corresponding ==person== points to all its ==trips== and to its ==company==.
 
 If your domain has strictly delimited areas, e.g. clients, you could think about creating one repository per area (client). 
 
+!!! Retrieving data 
+
+One question is if it possible to  retrieve data from Mongo collection even if the database was not created via Voyage.
+Yes it is possible. Here is the solution.
+
+First we create a class ==MyClass== with two class side methods:
+
+[[[
+MyClass class >> isVoyageRoot
+	^ true
+]]]
+
+[[[
+MyClass class >> descriptionContainer
+    <voyageContainer>
+    ^ VOContainer new
+        collectionName: 'myCollection';
+        yourself
+]]]
+	
+Also, to properly read the data one should add instance variables depending on what is in the database. 
+
+For example if we have the following information stored in the database: 
+
+[[[
+{ "_id" : ObjectId("5900a0175bc65a2b7973b48a"), "item" : "canvas", "qty" : 100, "tags" : [ "cotton" ] }
+]]]
+
+In this case ==MyClass== should have instanceVariables: ==item==, ==qty== and ==tags== and accessors.
+Then we define the following description on the class side
+
+[[[
+MyClass class >> mongoItem
+	<mongoDescription>
+	^ VOToOneDescription new
+		attributeName: 'item';
+		kind: String;
+		yourself
+]]]
+
+[[[
+MyClass class >> mongoQty
+	<mongoDescription>
+	^ VOToOneDescription new
+		attributeName: 'qty';
+		kind: Integer;
+		yourself
+]]]
+
+[[[
+MyClass class >> mongoTags
+	<mongoDescription>
+	^ VOToOneDescription new
+		attributeName: 'tags';
+		kind: OrderedCollection;
+		yourself
+]]]
+	
+After that one can connect to database and get the information.
+
+[[[
+| repository | 
+repository := VOMongoRepository database: 'databaseName'.
+repository selectAll: MyClass
+]]]
+
+
 
 
 
