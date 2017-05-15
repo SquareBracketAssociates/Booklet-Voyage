@@ -200,12 +200,12 @@ After we add ==isVoyageRoot== to ==Point class==, and save the rectangle, in the
 	"origin" : {
 		"#collection" : "point",
 		"#instanceOf" : "Point",
-		"__id" : ObjectId("7804c56c0000000000000000")
+		"_id" : ObjectId("7804c56c0000000000000000")
 	},
 	"corner" : {
 		"#collection" : "point",
 		"#instanceOf" : "Point",
-		"__id" : ObjectId("2a731f310000000000000000")
+		"_id" : ObjectId("2a731f310000000000000000")
 	}
 }
 ]]]
@@ -398,7 +398,7 @@ possibly may no longer be able to query these objects by their OID (by
 using ==voyageId==), since mongo expects a certain format. If you do, you should check your format by querying for it in the mongo console, for example as below. If you get the ==result Error: invalid object id: length==, then you will not be able to query this object by id.
 
 [[[
-> db.Trips.find({"person.__id" : ObjectId("190372")})
+> db.Trips.find({"person._id" : ObjectId("190372")})
 Fri Aug 28 14:21:10.815 Error: invalid object id: length
 ]]]
 
@@ -457,7 +457,7 @@ With No-SQL databases, it is impossible to query on multiple collections (the eq
 returned by a previous query and using that id to match another object. An example where we match colors ==color== to a reference color ==refCol== is as follows:
 
 [[[
-[ :each | (each at: 'color.__id') = refCol voyageId ]
+[ :each | (each at: 'color._id') = refCol voyageId ]
 ]]]
 
 !!!Using the at: message to access embedded documents

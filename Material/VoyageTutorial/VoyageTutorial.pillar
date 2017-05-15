@@ -368,12 +368,12 @@ are not nested inside the hero documents.
 		{
 			"#collection" : "Power",
 			"#instanceOf" : "Power",
-			"__id" : ObjectId("d84745dd421aa909b4000005")
+			"_id" : ObjectId("d84745dd421aa909b4000005")
 		},
 		{
 			"#collection" : "Power",
 			"#instanceOf" : "Power",
-			"__id" : ObjectId("d84745dd421aa909b4000006")
+			"_id" : ObjectId("d84745dd421aa909b4000006")
 		}
 	]
 }
