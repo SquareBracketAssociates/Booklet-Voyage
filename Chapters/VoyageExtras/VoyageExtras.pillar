@@ -22,7 +22,7 @@ Or you have an instance (in this example of ==Person==) which is in a root colle
  Trip
 		selectMany:
 			{('receipts.description' -> aString).
-			('person.__id' -> aPerson voyageId)} asDictionary
+			('person._id' -> aPerson voyageId)} asDictionary
 
 ]]]
 
@@ -173,19 +173,19 @@ Trip
 "#version" : 876079653, 
 "person" : { 
 	"#collection" : "Persons", 
-	"__id" : ObjectId("55cf2bbb3c9b0fe702000007") }, 
+	"_id" : ObjectId("55cf2bbb3c9b0fe702000007") }, 
 "receipts" : [ 	
 	{ "currency" : "EUR", 	
 	"date" : { "#instanceOf" : "ZTimestamp", "jdn" : 2457249, "secs" : 0 }, 	
 	"exchangeRate" : 1, 	
 	"paymentMethod" : {
 		"#collection" : "PaymentMethods", 	
-		"__id" : ObjectId("55cf2bbb3c9b0fe702000003") }, 
+		"_id" : ObjectId("55cf2bbb3c9b0fe702000003") }, 
 	"receiptDescription" : "Taxi zum Hotel", 	
 	"receiptNumber" : 1, 	
 	"trip" : { 
 		"#collection" : "Trips", 	
-		"__id" : ObjectId("55cf2bc73c9b0fe702000008") } } ], 
+		"_id" : ObjectId("55cf2bc73c9b0fe702000008") } } ], 
 	"startPlace" : "Österreich",    
 	"tripName" : "asdf", 
 	"tripNumber" : 1 }
@@ -199,7 +199,7 @@ The corresponding ==person== points to all its ==trips== and to its ==company==.
 "bankName" : "",
  "company" : { 
 "#collection" : "Companies", 
-"__id" : ObjectId("55cf2bbb3c9b0fe702000002") },
+"_id" : ObjectId("55cf2bbb3c9b0fe702000002") },
 "email" : "bb@spesenfuchs.de", 
 "firstName" : "Berta",
 "lastName" : "Block",  
@@ -209,7 +209,7 @@ The corresponding ==person== points to all its ==trips== and to its ==company==.
 "trips" : [ 	
 {
 "#collection" : "Trips", 	
-"__id" : ObjectId("55cf2bc73c9b0fe702000008") } ] }
+"_id" : ObjectId("55cf2bc73c9b0fe702000008") } ] }
 ]]]
 
 If your domain has strictly delimited areas, e.g. clients, you could think about creating one repository per area (client). 
