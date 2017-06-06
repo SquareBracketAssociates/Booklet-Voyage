@@ -15,3 +15,5 @@ look here for more [Books and Booklets](http://files.pharo.org/books/)
 [badge]: https://travis-ci.org/SquareBracketAssociates/Booklet-Voyage.svg?branch=master
 [Voyage]: https://github.com/pharo-nosql/voyage
 [Browse]: http://files.pharo.org/books-pdfs/booklet-Voyage/
+
+You can find the PDF at https://ci.inria.fr/pharo-contribution/job/Booklet-Voyage/
