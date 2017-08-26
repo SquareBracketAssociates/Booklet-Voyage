@@ -18,5 +18,5 @@ is a booklet describing its usage and operation.
 look here for more [Books and Booklets](http://files.pharo.org/books/)
 
 You can find the PDF at 
-[https://ci.inria.fr/pharo-contribution/job/Booklet-Voyage/][https://ci.inria.fr/pharo-contribution/job/Booklet-Voyage/]
+[https://ci.inria.fr/pharo-contribution/job/Booklet-Voyage/](https://ci.inria.fr/pharo-contribution/job/Booklet-Voyage/)
 The result from the latest successful Travis build can be found [on Bintray (PDF)](https://bintray.com/squarebracketassociates/wip/download_file?file_path=voyage-wip.pdf).
