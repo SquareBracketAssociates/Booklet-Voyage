@@ -6,15 +6,13 @@ before_install:
 - docker pull dpollet/texlive:pillar
 
 script: |
-  docker run --tty --rm --volume $PWD:/work dpollet/texlive:pillar bash -c "\
-    wget --quiet --output-document=- 'https://raw.githubusercontent.com/pillar-markup/pillar/master/download.sh' | bash \
-    && make spiralbook \
-  "
+  docker run --tty --rm --volume $PWD:/work dpollet/texlive:pillar bash -c "make bootstrap && make spiralbook"
 
 deploy:
 - provider: bintray
   file: .bintray.json
   on:
+    all_branches: true
     repo: SquareBracketAssociates/Booklet-Voyage
   skip_cleanup: true
   user: ducasse
@@ -22,8 +20,7 @@ deploy:
     secure: ThnjhD8OMRlL5NmsK8dGQR4mpzXG2Kj2NeWHA5oHCO4YTaK0fKLPHF8YcjlyQorESX6+Z/Q0ihtTq1/3GguH8rzjAS8DrgArB3Stcg6npfyB3svyeVWXTKP8EPLHtenBnLANWTj/tYfHd6egDltJlxGMrEd5tHzl8CNlD+mmfQA1VhXUEmh8pw8P6VfFDWiL+bHG/Am1DI8SspcuQbYcKzh6ZdadvXwpEfQr07VTc0w4zygRk6h8z+76wX8N7xebr66aLe9FipZ0d3dYYfhZl3mtsOoUJmvGpnsSYt3h3I9TnOTeZjGAUEfzxdoZ6CRMIExUhNU7VEBMN4FKP8Oic8Eu1i/Ay7cM74mwGgJCX8DE0M/y0DJqJoKEk+NojoZfSgSzwslE1hXSZSaAJoTr9EDkZwEpVDCep42TVZyOYa+GICZCWpO999KYZlm8ItD4EJsqu8s2pipEMmcLGbGDBejuQ/30NRvelNG6xcT0wTg4595zNuP4k9cOYG9RddlqDzy8E333oz+cJ2R9zolsQpNHZtsQvKvbamRt0fsKjOgGv/a4Wslp1ZczWezRbBCxWC8wvtYSn1MWraQUGh6E3OrljoplbgUmOY/XLsAJeeFxIAmOwUzo2PK5S43nEhKQQNr/CmP4TAL9P3wbsBhQ/WXa4f8lUSeexDzrK7qY8J0=
 - provider: releases
   file: build/voyage.spiral.pdf
-  on:
-    tags: true
+  on: { tags: true }
   skip_cleanup: true
   api_key:
-    secure: pRfu3fr35BzqQDi1ul0SubPSwO8zcyIidqLRZPz3XIrH4qoy1Zgnq785dmB7ziNQqH+VJyh7askSFY3JLxL0d4P0eUgj2ZDIOhJsUQQ/ihevOBWbxlMOoEPjQfzA11l8WrNCQ566KrcYiISRi7bCg698kPTWSRwOmmvqXOJe5zGkuUbVmMNUV2oxaNV4JC8kVyVWHYy0nNMLEX/hzRZRh1+8K34/ds+fZ7irLrbDWMbKGHCyuLCSqv+zJJdu99nWLTclrCxFzK4DEHaMlFiO7wkUpyQLwZ38EDnb3E7iv045jSqCx3XB+DMRG1Da2/9BIXl0mho5ELdEvfGVAbjI2no5FWd0H1cs4/banAePCFnM7ZscJBaPWgVajB7EzrcADJUoxpmU6+6n1aIC3CnjscfAHqSAKGv8CO/Jh+Uirc8ATRpSqa73f2Nnj9tRCqwCOnFOCEzu0w5l3Ppz2Qpif04P+QbebZehSVaBJ4W01R2i8Rac3IuZDhZVaek1X24HFxUOd/rvHpbhz8eeANdnsWCTkAm+0sD+iKsWKICRMxFZfCK/SPldAcjXZsOsEMTqfx7ZWyCc7GeesQWcmW+z3shziyQd9tdeArJWLwacly3hH3WeyuUD5JyPF9klvDBtHgTVajdU4yp+3oXsrtTmetnBz+RESxQGdLgZRlQBQog=
+    secure: T0JYu7ciwbosCJcyqPv+XoOKZb/Xnve+C+Z/FxKl1ivAQK+ZuUUAvnRLVOppw3CagmkfJclpkkhyoEWAW6c9ZLnDA7VNk+CGC+OmNFhvtEcmBFpzqCzC3jn028xVk0/rg2lrCtsRnGXkSwNmpLUKU1Em0eOdFHqKkbXCYPJDzG7lcP1GgZDgGZSp4eIBVdi9904DRZhuKPHSycbBbQIbMnLlEw42DBGUtrGgtmnFwg0y0STmXib4rVnQdmcnkWMIzygj8fc+XL7In2XjyOnef009vpWd5Oz1tBpzwgMYblo2p7ErDWeD0oMWeth+HJJuzdUfeyl2yk4GgvwSbFS7+iSI+TXuwJKvkmwMiMgtbTvWC+E3N4AVZmgRLhUXldyUkmiqTzkPmatWIofnfEtYT7r9dWDz7Opf+LzT09Mm0D6QHsm/mNJ+0X5WzgkWj/h9XPTbF3y5bZlh+U822W3wGmXc7hg60Qii8bqU6qEutKSF+3y+g7Y0xtjHRQuMGX47FygBnDqlGVwdjL6VvG0o2a3qWC7Tt4KSRKigwzRL6KevQRmmBp+QNQDA2YUJ5I9vX4Ail7O3BOIQydYXN7VPobCevIGa+q6AfscbU+ZoXOWTmQ4VGm++fWYf8hTDKIonYAaQlrSvDZCOhp9qQTaDEo9KBIXWvAHOq6FmJ/Rg3KY=
