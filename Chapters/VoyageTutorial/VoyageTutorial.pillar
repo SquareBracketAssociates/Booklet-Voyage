@@ -447,7 +447,6 @@ database containing both weapons and armors.
 
 In fact equipments can also have powers (like the hammer of Thor). Therefore we add powers to the equipments as follows: 
 
-
 [[[
 Object subclass: #Equipment 
 	instanceVariableNames: 'powers' 
@@ -458,7 +457,8 @@ Object subclass: #Equipment
 [[[	
 Equipment >> powers
 	^ powers ifNil: [ powers := Set new ]
-	
+]]]
+[[[
 Equipment >> addPower: aPower 
 	self powers add: aPower
 ]]]
