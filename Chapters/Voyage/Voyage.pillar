@@ -62,7 +62,7 @@ First we show Singleton mode:
 | ==selectMany:== | retrieves all objects that matches the argument
 
 
-Second is Instance mode. In Instance mode, the first argument is always the repository on which to perform the operation.
+Second is Instance mode. In Instance mode, the receiver is always the repository on which to perform the operation.
 | ==save:==				 | stores an object into repository (insert or update)
 | ==remove:==			  | removes an object from repository
 | ==removeAll:==		  | removes all objects of class from repository
