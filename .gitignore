@@ -6,6 +6,7 @@
 /pharo-vm/
 /build/
 _result
-packages-cache
+package-cache
 play-cache
 pharo-local
+download.sh
