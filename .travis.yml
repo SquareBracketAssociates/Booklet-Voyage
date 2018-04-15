@@ -1,13 +1,28 @@
-sudo: required
-services:
-- docker
+language: smalltalk
+sudo: false
 
-before_install:
-- docker pull dpollet/texlive:pillar
+os:
+  - linux
 
-script: |
-  docker run --tty --rm --volume $PWD:/work dpollet/texlive:pillar bash -c "make bootstrap && make spiralbook"
+smalltalk:
+  - Pharo-6.1
 
+# Unit tests run the normal pillar tests
+# Integration tests test that pillar itself can interact with generated files, pdf generation, etc.
+# System tests test that we can install and use pillar as a black box
+env:
+  matrix:
+  - JOB=test TYPE=System ARCHETYPE=book OUTPUT=pdf
+
+install:
+  # Pillar installation
+  - git clone https://github.com/pillar-markup/pillar.git -b newpipeline  # Clone pillar
+  - cd pillar && ./scripts/build.sh && cd ..                              # Run pillar build script. Pillar will be built in `pwd`/build!
+  - . pillar/scripts/ci/ensure_latex.sh                                   # Install latex
+  - ./pillar/scripts/ci/ensure_book_dependencies.sh                       # Install latex dependencies required by pillar
+  
+script:
+  - ./pillar/build/pillar build pdf
 deploy:
 - provider: bintray
   file: .bintray.json
@@ -17,7 +32,7 @@ deploy:
   skip_cleanup: true
   user: ducasse
   key:
-    secure: ThnjhD8OMRlL5NmsK8dGQR4mpzXG2Kj2NeWHA5oHCO4YTaK0fKLPHF8YcjlyQorESX6+Z/Q0ihtTq1/3GguH8rzjAS8DrgArB3Stcg6npfyB3svyeVWXTKP8EPLHtenBnLANWTj/tYfHd6egDltJlxGMrEd5tHzl8CNlD+mmfQA1VhXUEmh8pw8P6VfFDWiL+bHG/Am1DI8SspcuQbYcKzh6ZdadvXwpEfQr07VTc0w4zygRk6h8z+76wX8N7xebr66aLe9FipZ0d3dYYfhZl3mtsOoUJmvGpnsSYt3h3I9TnOTeZjGAUEfzxdoZ6CRMIExUhNU7VEBMN4FKP8Oic8Eu1i/Ay7cM74mwGgJCX8DE0M/y0DJqJoKEk+NojoZfSgSzwslE1hXSZSaAJoTr9EDkZwEpVDCep42TVZyOYa+GICZCWpO999KYZlm8ItD4EJsqu8s2pipEMmcLGbGDBejuQ/30NRvelNG6xcT0wTg4595zNuP4k9cOYG9RddlqDzy8E333oz+cJ2R9zolsQpNHZtsQvKvbamRt0fsKjOgGv/a4Wslp1ZczWezRbBCxWC8wvtYSn1MWraQUGh6E3OrljoplbgUmOY/XLsAJeeFxIAmOwUzo2PK5S43nEhKQQNr/CmP4TAL9P3wbsBhQ/WXa4f8lUSeexDzrK7qY8J0=
+    secure: Wn+0wEaAuaSbAkG5/KQSw/4sjMSqw1qGcJ01O7NBarcZ/uIKjxOinaTLe9pyZt133vX2zaSzHEPDb+s3V7f4BsLU6r8E168n8MQ3jgtOgeVK6BJ/JFC54+s1qE3axQBfci1Thkc9mHUL0iFH7lfxqOlpAj/CNI8zb8MMTUP0PKC2JF84rVMbidoPL9mcMw/FeDhLHOJVzR+3cw9I3DmGDBSzpPKyv9cnMmJ9Vlj9ySwtngVjwpt1zBpCKG5CFo0YyyIEkt7AdNXuFqGuMPHdY7v11KNLGGTS8NEbRdF7aYxA5X/mq/qfCnnrW7hGIdLpKsaXA7ElVL3vqxZrRgiSqG1fc88Ltq4TDAyB+YN6m3egRzuVOebHcW+qsFSNZDyE5eYzjbH0hpUxV1fuLudTj/+2yzttHCH25l1Y7/3KQac5s2yiuPKYHcr/wEIF9H3wRrJvgxSegKGyHZyXJodnWzJmiDUK2GY+XXmiF0QhDVs3f8mFuvA3eVAtjh1+xGWX9VdDD1s2z8sCw/xUxpYGqV8abIrEfczgi15/ta9UGOTUhwkFJNupaqTfn+rgVNfjpnIk9n0wokKD19GapdUHq/6lU9ZhjvM7FdlvkGxxIHs4/3UjLjfKSgtzfSui97w0opv0Zr9uKo+95xKwyyr/qDRWjhAdp9a2Q8wRbg4TD3Y=
 - provider: releases
   file: build/voyage.spiral.pdf
   on: { tags: true }
