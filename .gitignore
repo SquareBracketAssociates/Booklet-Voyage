@@ -5,3 +5,7 @@
 /mustache
 /pharo-vm/
 /build/
+_result
+packages-cache
+play-cache
+pharo-local
