@@ -18,7 +18,7 @@
 
     "files": [
         {
-            "includePattern": "build/(voyage).spiral.pdf",
+            "includePattern": "_result/(voyage).pdf",
             "uploadPattern": "$1-wip.pdf",
             "matrixParams": { "override": 1 }
         }
