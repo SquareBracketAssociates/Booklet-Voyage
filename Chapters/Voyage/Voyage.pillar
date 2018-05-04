@@ -88,6 +88,36 @@ In case the connection to the database needs to be dropped, this is performed as
 VORepository setRepository: nil.
 ]]]
 
+!!! Testing and Singleton
+
+When we want to test that actions are really saving or removing an object from a Voyage repository we should take care that running the tests are not touching a database that may be in use. This is important since we are in presence of Singleton, which is acting as a global variable.
+We should make sure that the tests are run against a repository especially set up for the tests and that they do not affect another repository. 
+
+Here is a typical solution: during the setup, we store the current repository, set a new one and this is this new temporary repository that will be used for the tests.
+
+
+[[[
+TestCase subclass: #SuperHeroTest
+	instanceVariableNames: 'oldRepository'
+	classVariableNames: ''
+	package: 'MyVoyageTests'
+]]]
+
+[[[
+SuperHeroTest >> setUp
+	oldRepository := VORepository current.
+	VORepository setRepository: VOMemoryRepository new.
+]]]
+
+On teardown we set back the saved repository and discard the newly created repository.
+
+[[[
+SuperHeroTest >> tearDown
+	VORepository setRepository: oldRepository
+]]]
+
+
+
 !!!Storing objects
 
 To store objects, the class of the object needs to be declared as being a ''root of the repository''. All repository roots are points of entry to the database.
@@ -376,6 +406,18 @@ allows to place cut-off points in the graph of objects that is being saved, i.e.
 database. This may also be used to break cycles in the stored object graph. It however entails that when retrieving the graph from the database, attributes that
 contain these objects will be set to ==nil==. To address this, a post-load action can be specified for the attribute descriptor or the container descriptor, to
 set these attributes to the correct values.
+
+Here is an example that declares that the attribute 'currencyMetaData' is excluded from storage.
+
+[[[
+Amount class>>mongoCurrencyMetaData
+	<mongoDescription>
+	
+	^VOTransientDescription new
+		attributeName: 'currencyMetaData';
+		yourself
+]]]
+
 
 !!! A few words concerning the OID
 
