@@ -11,3 +11,4 @@ play-cache
 pharo-local
 download.sh
 .DS_Store
+*.DS_Store
