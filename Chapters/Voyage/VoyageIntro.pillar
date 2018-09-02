@@ -4,7 +4,7 @@
 
 Voyage is a small persistence framework developed by Esteban Lorenzano, constructed as a small layer between the objects and a persistency mechanism often a document noSql database.
  
-This booklet started as a number of blog posts by Esteban Lorenzano, which have been extensively reworked by Johan Fabry and Stéphane Ducasse, including additional information shared by Sabine Manaa and Norbert Hartl. This became the chapter in the Enterprise Pharo book available at *http://books.pharo.org>http://books.pharo.org). Since this chapter was complex to edit without producing a complete version of the book and that extra material such as the super heroes tutorial written by Stephane Ducasse appeared the current booklet is a merge of all the sources and will be the most actively maintained documentation. 
+This booklet started as a number of blog posts by Esteban Lorenzano, which have been extensively reworked by Johan Fabry and Stéphane Ducasse, including additional information shared by Sabine Manaa and Norbert Hartl. This became the chapter in the Enterprise Pharo book available at *http://books.pharo.org>http://books.pharo.org*). Since this chapter was complex to edit without producing a complete version of the book and that extra material such as the super heroes tutorial written by Stephane Ducasse appeared the current booklet is a merge of all the sources and will be the most actively maintained documentation. 
 
 
 
