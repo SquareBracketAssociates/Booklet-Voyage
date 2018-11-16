@@ -55,6 +55,39 @@ Gofer it
 
 This will load all that is needed to persist objects into a Mongo database.
 
+In Pharo 70 and on github we can use the following expressions to load different packages of Voyage.
+
+!!!! Voyage-Mongo
+[[[
+Metacello new
+    repository: 'github://pharo-nosql/voyage/mc';
+    baseline: 'Voyage';
+    onConflictUseIncoming;
+    load: 'mongo tests'.
+]]]
+
+
+!!!! Voyage-UnQLite
+
+[[[
+Metacello new
+    repository: 'github://pharo-nosql/voyage/mc';
+    baseline: 'Voyage';
+    onConflictUseIncoming;
+    load: 'unqlite tests'.
+]]]
+
+
+!!!! Voyage-Memory
+
+[[[
+Metacello new
+    repository: 'github://pharo-nosql/voyage/mc';
+    baseline: 'Voyage';
+    onConflictUseIncoming;
+    load: 'memory tests'.
+]]]
+
 !!! Install your document databases
 
 !!!! MongoDB
