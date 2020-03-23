@@ -8,7 +8,7 @@ In this chapter we will do a tour of Voyage API.
 
 In Voyage, all persistent objects are stored in a repository. The kind of repository that is used determines the storage backend for the objects.
 
-To use the in-memory layer for Voyage, an instance of ==VOMemoryRepository== needs to be created, as follows:
+To use the in-memory layer for Voyage for testing purpose, an instance of ==VOMemoryRepository== needs to be created, as follows:
 
 [[[
 repository := VOMemoryRepository new
@@ -33,8 +33,8 @@ this can be done using the message
 
 Voyage can work in two different modes:
 
-- Singleton mode: There is an unique repository in the image, which works as a singleton keeping all the data. When you use this mode, you can program using a "behavioral complete" approach where instances respond to a certain vocabulary (see below for more details about vocabulary and usage).
-- Instance mode: You can have an undetermined number of repositories living in the image. Of course, this mode requires you to make explicit which repositories you are going to use.
+- Singleton mode: There is an unique repository in the image, which works as a singleton keeping all the data. When you use this mode, you program by using a "behavioral complete" approach where instances respond to a certain vocabulary (see below for more details about vocabulary and usage).
+- Instance mode: You can have an undetermined number of repositories living in the image. Of course, this mode requires you to make it explicit which repositories you are going to use.
 
 
 By default, Voyage works in instance mode: the returned instance has to be passed as an argument to all database API operations. Instead of having to keep this
@@ -50,7 +50,8 @@ repository enableSingleton.
 !!! Voyage API
 
 The following two tables show a representative subset of the API of Voyage. These methods are defined on ==Object== and ==Class==, but will only truly perform
-work if (instances of) the receiver of the message is a Voyage root. See the ==voyage-model-core-extensions== persistence protocol on both classes for the full
+work if (instances of) the receiver of the message is a Voyage root. From the example of SuperHero, ==Hero selectAll==, Hero must set up as a Voyage root.
+See the ==voyage-model-core-extensions== persistence protocol on both classes for the full
 API of Voyage.
 
 First we show Singleton mode:
@@ -62,7 +63,7 @@ First we show Singleton mode:
 | ==selectMany:== | retrieves all objects that matches the argument
 
 
-Second is Instance mode. In Instance mode, the receiver is always the repository on which to perform the operation.
+Second is Instance mode. In Instance mode, the receiver is always the repository on which to perform the operation. For exampel, ==aRepository selectAll: Hero==
 | ==save:==				 | stores an object into repository (insert or update)
 | ==remove:==			  | removes an object from repository
 | ==removeAll:==		  | removes all objects of class from repository
@@ -75,7 +76,7 @@ Second is Instance mode. In Instance mode, the receiver is always the repository
 In a deployed application, there should be no need to close or reset the connection to the database. Also, Voyage re-establishes the connection when the image
 is closed and later reopened.
 
-However, when developing, resetting the connection to the database may be needed to reflect changes. This is foremost required when changing storage options of
+However, when developing, resetting the connection to the database, it may be needed to reflect changes. This is foremost required when changing storage options of
 the database (see section *@enhancing*). Performing a reset is achieved as follows:
 
 [[[
@@ -93,7 +94,7 @@ VORepository setRepository: nil.
 When we want to test that actions are really saving or removing an object from a Voyage repository we should take care that running the tests are not touching a database that may be in use. This is important since we are in presence of Singleton, which is acting as a global variable.
 We should make sure that the tests are run against a repository especially set up for the tests and that they do not affect another repository. 
 
-Here is a typical solution: during the setup, we store the current repository, set a new one and this is this new temporary repository that will be used for the tests.
+Here is a typical solution: during the setup, we store the current repository, set a new one and this is the new temporary repository that will be used for the tests.
 
 
 [[[
