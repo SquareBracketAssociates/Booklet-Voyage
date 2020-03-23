@@ -76,7 +76,7 @@ Second is Instance mode. In Instance mode, the receiver is always the repository
 In a deployed application, there should be no need to close or reset the connection to the database. Also, Voyage re-establishes the connection when the image
 is closed and later reopened.
 
-However, when developing, resetting the connection to the database, it may be needed to reflect changes. This is foremost required when changing storage options of
+However, when developing or resetting the connection to the database, it may be needed to reflect changes. This is foremost required when changing storage options of
 the database (see section *@enhancing*). Performing a reset is achieved as follows:
 
 [[[
@@ -91,8 +91,8 @@ VORepository setRepository: nil.
 
 !!! Testing and Singleton
 
-When we want to test that actions are really saving or removing an object from a Voyage repository we should take care that running the tests are not touching a database that may be in use. This is important since we are in presence of Singleton, which is acting as a global variable.
-We should make sure that the tests are run against a repository especially set up for the tests and that they do not affect another repository. 
+When we want to test that actions are really saving or removing an object from a Voyage repository we should be aware of not touching the productive database meanwhile running the tests. This is important since we are in presence of Singleton, which is acting as a global variable.
+We should make sure that the tests are run against a repository which especially set up for the tests and which will not affect another repository. 
 
 Here is a typical solution: during the setup, we store the current repository, set a new one and this is the new temporary repository that will be used for the tests.
 
