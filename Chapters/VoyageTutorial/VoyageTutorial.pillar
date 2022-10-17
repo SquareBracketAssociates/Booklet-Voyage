@@ -1,4 +1,4 @@
-!! A Simple Tutorial with Super Heroes
+﻿!! A Simple Tutorial with Super Heroes
 
 This chapter describes a step by step tutorial showing the possibilities offered by Voyage (an object to document mapper)
 We will use a simple but not trivial domain: super heroes, super powers and their equipments.
@@ -8,7 +8,7 @@ You will learn how to save and retrieve objects.
 
 !!! Creating a connection
 
-One you installed MongoBD, we can start to connect to the database as follows:
+Once you installed MongoBD, we can start to connect to the database as follows:
 
 [[[
 | repository |
@@ -260,7 +260,8 @@ Hero removeAll. “Beware of this!”
 
 !!! Adding a new root
 
-Now we will change our requirement and show that we want to be able to query another class of objects: the powers. Note that when you add a root, it is important that you either flush your database or perform a migration by for example loading old objects are republishing them. 
+Now we will change our requirement and show that we want to be able to query another class of objects: the powers. Note that when you add a root, it is important that you either delet your 
+database or perform a migration by ,for example, loading old objects and republishing them. 
 
 Each time you change the database 'schema', you should reset the database using the following expression:
 [[[
@@ -308,7 +309,7 @@ Now saving your objects and checking the mongo db again should show
 	Power
 ]]]
 
-Now we can save a hero and its superpowers. To fully test we flush the heroes in the database 
+Now we can save a hero and its superpowers. To fully test we remove the heroes in the database 
 executing ==Hero removeAll== and we execute the following:
 
 [[[

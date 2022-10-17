@@ -1,4 +1,4 @@
-!! Voyage
+﻿!! Voyage
 @cha:voyageintro
 
 
@@ -44,7 +44,7 @@ This booklet has several chapters
 
 !!! Load Voyage
 
-To install Voyage, including support for the MongoDB database, go to the Configurations Browser (in the World Menu/Tools) and load ConfigurationOfVoyageMongo. Or alternatively execute in a workspace:
+To install Voyage, including support for the MongoDB database, go to Configurations Browser (in the World Menu/Tools) and load ConfigurationOfVoyageMongo. Or alternatively execute in a workspace:
 
 [[[
 Gofer it
