@@ -1,8 +1,0 @@
-
-${inputFile:path=Chapters/Voyage/VoyageIntro.pillar}$
-
-${inputFile:path=Chapters/VoyageTutorial/VoyageTutorial.pillar}$
-
-${inputFile:path=Chapters/Voyage/Voyage.pillar}$
-
-${inputFile:path=Chapters/VoyageExtras/VoyageExtras.pillar}$
