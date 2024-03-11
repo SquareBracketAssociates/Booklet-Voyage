@@ -1,13 +1,10 @@
 # A booklet on Voyage: object persistence via NoSQL
 
+[![Download PDF](https://img.shields.io/badge/Download-PDF-9cf.svg)](https://github.com/SquareBracketAssociates/Booklet-Voyage/releases/download/latest/Voyage.pdf)
+[![Centralized book generation](https://github.com/SquareBracketAssociates/Booklet-Voyage/actions/workflows/main.yml/badge.svg)](https://github.com/SquareBracketAssociates/Booklet-Voyage/actions/workflows/main.yml)
 
 
-[travis]: https://travis-ci.org/SquareBracketAssociates/Booklet-Voyage
-[badge]: https://travis-ci.org/SquareBracketAssociates/Booklet-Voyage.svg?branch=master
 [Voyage]: https://github.com/pharo-nosql/voyage
-[Browse]: http://files.pharo.org/books-pdfs/booklet-Voyage/
-
-[![Build status][badge]][travis]
 
 [Voyage] is a small persistence framework developed by Esteban
 Lorenzano, constructed as a small layer between the objects and
