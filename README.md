@@ -11,6 +11,6 @@ Lorenzano, constructed as a small layer between the objects and
 a persistency mechanism often a document noSql database and this
 is a booklet describing its usage and operation.
  
- Look here for more [Books and Booklets](http://files.pharo.org/books/)
+ Look here for more [Books and Booklets](http://books.pharo.org)
 
-You can find the PDF at in the 'Releases' pane of the htis package.
+You can find the PDF at in the 'Releases' pane of the this package.
